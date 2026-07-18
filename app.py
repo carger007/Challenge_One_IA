@@ -1,5 +1,6 @@
 from src.loader import load_pdf
-
+from src.splitter import split_text
+from src.embeddings import get_embeddings
 
 def main():
 
@@ -7,15 +8,21 @@ def main():
 
     document = load_pdf(pdf_path)
 
+    chunks = split_text(document)
+
+    embeddings = get_embeddings()
+
     print("=" * 50)
     print("PDF leído correctamente")
     print("=" * 50)
 
-    print(f"Cantidad de caracteres: {len(document)}")
+    print(f"Cantidad de chunks: {len(chunks)}")
 
-    print("\nPrimeros 1000 caracteres:\n")
+    print("\nPrimer chunk:\n")
 
-    print(document[:1000])
+    print(chunks[0].page_content)
+
+    print("\nModelo de embeddings creado correctamente.")
 
 
 if __name__ == "__main__":
