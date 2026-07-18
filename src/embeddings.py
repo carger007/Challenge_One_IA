@@ -9,8 +9,9 @@ def get_embeddings():
     """
 
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
-        google_api_key=GOOGLE_API_KEY
+        model="gemini-embedding-2-preview",
+        google_api_key=GOOGLE_API_KEY,
+        task_type="RETRIEVAL_DOCUMENT"
     )
 
     return embeddings

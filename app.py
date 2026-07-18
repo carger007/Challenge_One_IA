@@ -1,6 +1,7 @@
 from src.loader import load_pdf
 from src.splitter import split_text
 from src.embeddings import get_embeddings
+from src.vector_store import create_vector_store
 
 def main():
 
@@ -11,6 +12,8 @@ def main():
     chunks = split_text(document)
 
     embeddings = get_embeddings()
+
+    vector_store = create_vector_store(chunks, embeddings)
 
     print("=" * 50)
     print("PDF leído correctamente")
