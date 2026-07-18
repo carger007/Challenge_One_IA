@@ -1,7 +1,7 @@
 from src.loader import load_pdf
 from src.splitter import split_text
 from src.embeddings import get_embeddings
-from src.vector_store import create_vector_store
+from src.vector_store import create_vector_store, load_vector_store
 
 def main():
 
@@ -14,6 +14,18 @@ def main():
     embeddings = get_embeddings()
 
     vector_store = create_vector_store(chunks, embeddings)
+
+    if vector_store is None:
+
+        print("Creando base vectorial...")
+
+        vector_store = create_vector_store(
+            chunks,
+            embeddings
+        )
+    else:
+        print("Base vectorial cargada correctamente.")
+
 
     print("=" * 50)
     print("PDF leído correctamente")
