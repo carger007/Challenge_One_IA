@@ -2,6 +2,10 @@ from src.loader import load_pdf
 from src.splitter import split_text
 from src.embeddings import get_embeddings
 from src.vector_store import create_vector_store, load_vector_store
+from src.chatbot import (
+    create_chat_model,
+    answer_question
+)
 
 def main():
 
@@ -13,7 +17,7 @@ def main():
 
     embeddings = get_embeddings()
 
-    vector_store = create_vector_store(chunks, embeddings)
+    vector_store = load_vector_store(embeddings)
 
     if vector_store is None:
 
@@ -26,18 +30,36 @@ def main():
     else:
         print("Base vectorial cargada correctamente.")
 
+    llm = create_chat_model()
 
-    print("=" * 50)
-    print("PDF leído correctamente")
-    print("=" * 50)
+    while True:
 
-    print(f"Cantidad de chunks: {len(chunks)}")
+        question = input("\nPregunta (o escribe 'salir'): ")
 
-    print("\nPrimer chunk:\n")
+        if question.lower() == "salir":
+            break
 
-    print(chunks[0].page_content)
+        answer = answer_question(
+            vector_store,
+            llm,
+            question
+        )
 
-    print("\nModelo de embeddings creado correctamente.")
+        print("\nRespuesta:\n")
+
+        print(answer)
+
+    # print("=" * 50)
+    # print("PDF leído correctamente")
+    # print("=" * 50)
+
+    # print(f"Cantidad de chunks: {len(chunks)}")
+
+    # print("\nPrimer chunk:\n")
+
+    # print(chunks[0].page_content)
+
+    # print("\nModelo de embeddings creado correctamente.")
 
 
 if __name__ == "__main__":
