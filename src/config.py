@@ -6,5 +6,7 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-if GOOGLE_API_KEY is None:
-    raise ValueError("No se encontró GOOGLE_API_KEY en el archivo .env")
+if not GOOGLE_API_KEY:
+    raise ValueError(
+        "No se encontró GOOGLE_API_KEY. Configúrala en el archivo .env o en los Secrets de Streamlit."
+    )
