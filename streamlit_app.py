@@ -28,7 +28,7 @@ st.write(
 @st.cache_resource
 def load_resources():
 
-    pdf_path = "data/politica_de_reembolsos_y_devoluciones_de_BimBam_Buy.pdf"
+    pdf_path = "Data/politica_de_reembolsos_y_devoluciones_de_BimBam_Buy.pdf"
 
     document = load_pdf(pdf_path)
 
